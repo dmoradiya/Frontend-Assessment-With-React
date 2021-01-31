@@ -5,10 +5,15 @@ import "../css/main.css";
 const App = () => {
     const [clientData, setClientData] = useState([]); 
     const [loading, setLoading] = useState(true); 
+    const [searchValue, setSearchValue] = useState(''); 
 
     const renderClientData = (clientData) => {
         return (
            <section id="main-section">
+               <div id="search-by-name-wrap">
+                    <label id="search-by-name-label" htmlFor="search-by-name">Search By Name</label>
+                    <input id="search-by-name-input" type="text" placeholder="Search by name" onChange={handleFieldChange} />
+                </div>
                 {clientData.students.map(val => 
                 <section key={val.id} id="info-section-wrap">
                     <div id="image-wrap">
@@ -26,6 +31,19 @@ const App = () => {
            </section>
         );
     }
+
+    function handleFieldChange(event) { /*Updates the constant values with whatever is located in the input fields*/
+        switch (event.target.id) {
+            case "search-by-name-input":
+                setSearchValue(event.target.value);
+                break;               
+            default:
+                break;
+            }
+    }
+
+
+
 
 
     const populateClientData = async () => { /*Populates response with API*/
