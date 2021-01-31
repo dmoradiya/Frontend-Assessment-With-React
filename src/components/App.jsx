@@ -5,7 +5,22 @@ const App = () => {
     const [clientData, setClientData] = useState([]); 
     const [loading, setLoading] = useState(true); 
 
-
+    const renderClientData = (clientData) => {
+        return (
+           <>
+                {clientData.students.map(val => 
+                <section key={val.id}>
+                    <img src={val.pic} alt={"Smiley face of "+val.firstName}/>
+                    <h2>{val.firstName+" "+val.lastName}</h2>
+                    <p>{"Email : "+val.email}</p>
+                    <p>{"Company : "+val.company}</p>
+                    <p>{"Skill : "+val.skill}</p>                    
+                    <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
+                </section>
+                )}
+           </>
+        );
+    }
 
 
     const populateClientData = async () => { /*Populates response with API*/
@@ -18,9 +33,14 @@ const App = () => {
         populateClientData();
     }, [loading]);
 
+    let contents = loading // Display only data after successful loading 
+    ? <h1>Loading...</h1>
+    : renderClientData(clientData);
+    
     return(
-        <>{console.log(clientData)}
-        </>
+        <section>                  
+            {contents}
+        </section>
     );
 }
 export default App;
