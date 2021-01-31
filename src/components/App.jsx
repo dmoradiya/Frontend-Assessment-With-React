@@ -14,7 +14,16 @@ const App = () => {
                     <label id="search-by-name-label" htmlFor="search-by-name">Search By Name</label>
                     <input id="search-by-name-input" type="text" placeholder="Search by name" onChange={handleFieldChange} />
                 </div>
-                {clientData.students.map(val => 
+                {clientData.students.filter(filterData => {
+                    if (searchValue === '') {
+                        return filterData
+                    }
+                    else {
+                       return (filterData.firstName.toLowerCase().includes(searchValue.toLowerCase())  ||
+                                filterData.lastName.toLowerCase().includes(searchValue.toLowerCase()))  
+                    }
+                })
+                .map(val => 
                 <section key={val.id} id="info-section-wrap">
                     <div id="image-wrap">
                          <img id="image" src={val.pic} alt={"Smiley face of "+val.firstName}/>
