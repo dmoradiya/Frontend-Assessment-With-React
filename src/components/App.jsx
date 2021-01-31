@@ -7,7 +7,7 @@ const App = () => {
 
     const renderClientData = (clientData) => {
         return (
-           <>
+           <section>
                 {clientData.students.map(val => 
                 <section key={val.id}>
                     <img src={val.pic} alt={"Smiley face of "+val.firstName}/>
@@ -18,7 +18,7 @@ const App = () => {
                     <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
                 </section>
                 )}
-           </>
+           </section>
         );
     }
 
