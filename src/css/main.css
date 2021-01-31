@@ -35,3 +35,12 @@
     margin-top: 2.5rem;
     margin-left: 3rem; 
 }
+/*Style Scroll bar*/
+::-webkit-scrollbar {
+    width: 0.3em;
+    border-radius: 0.5rem;
+}
+::-webkit-scrollbar-thumb {
+  background-color:  rgba(0, 0, 0, 0.25);
+  border-radius: 0.5rem;
+}
