@@ -8,13 +8,13 @@ const App = () => {
 
     const renderClientData = (clientData) => {
         return (
-           <section>
+           <section id="main-section">
                 {clientData.students.map(val => 
-                <section key={val.id} className="section-wrap">
-                    <div className="image-wrap">
+                <section key={val.id} id="info-section-wrap">
+                    <div id="image-wrap">
                          <img id="image" src={val.pic} alt={"Smiley face of "+val.firstName}/>
                     </div>                    
-                    <div className="info-wrap">
+                    <div id="info-wrap">
                         <h2>{val.firstName+" "+val.lastName}</h2>
                         <p>{"Email : "+val.email}</p>
                         <p>{"Company : "+val.company}</p>
