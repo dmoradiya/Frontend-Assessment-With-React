@@ -1,0 +1,24 @@
+@import url("./root.css");
+
+.section-wrap {
+    background-color: aqua;
+    display: flex;
+    border-bottom: .05rem solid red;
+}
+.image-warp {
+ flex:30%;  
+
+    
+    
+}
+.info-wrap {
+    flex:70%;
+    margin-left: 5rem;
+}
+#image {
+    transform: scale(1.5);
+    border: 1px solid rgb(126, 120, 120);
+    border-radius: 50%;
+    margin-top: 1.5rem;
+    margin-left: 2rem; 
+}
