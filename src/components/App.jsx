@@ -35,6 +35,16 @@ const App = () => {
                         <p>{"Company : "+val.company}</p>
                         <p>{"Skill : "+val.skill}</p>                    
                         <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
+                        <div>
+                            <p>{"Test 1 : "+val.grades[0]}</p>
+                            <p>{"Test 2 : "+val.grades[1]}</p>
+                            <p>{"Test 3 : "+val.grades[2]}</p>
+                            <p>{"Test 4 : "+val.grades[3]}</p>
+                            <p>{"Test 5 : "+val.grades[4]}</p>
+                            <p>{"Test 6 : "+val.grades[5]}</p>
+                            <p>{"Test 7 : "+val.grades[6]}</p>
+                            <p>{"Test 8 : "+val.grades[7]}</p>
+                        </div>
                     </div>  
                     <p id="expand-view"><FaPlus /></p>                  
                 </section>
