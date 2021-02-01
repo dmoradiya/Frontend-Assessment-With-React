@@ -41,6 +41,8 @@ const App = () => {
         );
     }
 
+
+
     function handleFieldChange(event) { /*Updates the constant values with whatever is located in the input fields*/
         switch (event.target.id) {
             case "search-by-name-input":
@@ -50,9 +52,6 @@ const App = () => {
                 break;
             }
     }
-
-
-
 
 
     const populateClientData = async () => { /*Populates response with API*/
