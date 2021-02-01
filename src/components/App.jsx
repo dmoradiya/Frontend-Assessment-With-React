@@ -1,6 +1,7 @@
 import  React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../css/main.css";
+import { FaPlus } from 'react-icons/fa';
 
 const App = () => {
     const [clientData, setClientData] = useState([]); 
@@ -28,13 +29,14 @@ const App = () => {
                     <div id="image-wrap">
                          <img id="image" src={val.pic} alt={"Smiley face of "+val.firstName}/>
                     </div>                    
-                    <div id="info-wrap">
-                        <h2>{val.firstName+" "+val.lastName}</h2>
+                    <div id="info-wrap">                        
+                        <h2>{val.firstName+" "+val.lastName}</h2>                                                                        
                         <p>{"Email : "+val.email}</p>
                         <p>{"Company : "+val.company}</p>
                         <p>{"Skill : "+val.skill}</p>                    
                         <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
-                    </div>                    
+                    </div>  
+                    <p id="expand-view"><FaPlus /></p>                  
                 </section>
                 )}
            </section>
