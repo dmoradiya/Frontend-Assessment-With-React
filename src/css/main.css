@@ -24,7 +24,7 @@
     border:none;
     padding-bottom: 0.5rem;
 }
-#search-by-name-label {
+#search-by-name-label, #input-add-tag-label {
     display: none;
 }
 #info-section-wrap {    

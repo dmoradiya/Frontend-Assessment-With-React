@@ -8,6 +8,8 @@ const App = () => {
     const [loading, setLoading] = useState(true); 
     const [searchValue, setSearchValue] = useState('');
     const [expand, setExpand] = useState([]); 
+    const [tag, setTag] = useState([]);
+    const [tagValue, setTagValue] = useState('');   
 
     const renderClientData = (clientData) => {
         return (
@@ -48,6 +50,13 @@ const App = () => {
                             <p>{"Test 8 : "+val.grades[7]}</p>
                         </div> : null                        
                         )}
+                        {tag.map(item => (item.id === val.id) ?                                                 
+                        <p>{item.name}</p> : null                        
+                        )}                       
+                        <form onSubmit={submitHandler(val.id)}>
+                            <label className="input-add-tag-label" htmlFor="add-tag">Add a tag</label>                                                        
+                            <input id="add-tag" type="text" placeholder="Add a tag" onChange={handleFieldChange} />
+                        </form>
                     </div>  
                     <p id="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
                 </section>
@@ -62,7 +71,10 @@ const App = () => {
         switch (event.target.id) {
             case "search-by-name-input":
                 setSearchValue(event.target.value);
-                break;               
+                break;     
+            case "add-tag":
+                setTagValue(event.target.value);
+                break;             
             default:
                 break;
             }
@@ -86,6 +98,16 @@ const App = () => {
         {
             return true
         }
+    }
+
+    const submitHandler = val => (event) => { 
+        event.preventDefault(); 
+        let tagObj = {
+            id: val,
+            name: tagValue
+        };
+        setTag([...tag, tagObj]);       
+       
     }
 
     const populateClientData = async () => { // Populates response with API
