@@ -52,7 +52,7 @@ const App = () => {
                         
                         )}
                     </div>  
-                    <p className="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
+                    <p id="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
                 </section>
                 )}
            </section>
@@ -77,7 +77,7 @@ const App = () => {
         
     }
    
-    let uniqueItems = [...new Set(expand)] // Creates Distinct element in new array 
+    const uniqueItems = [...new Set(expand)] // Creates Distinct element in new array 
        
     const clickCounter = (arr, val) => { // Count no. of Clicks 
         const number = arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
@@ -90,6 +90,7 @@ const App = () => {
             return true
         }
     }
+
     const populateClientData = async () => { // Populates response with API
         const response = await axios.get('https://api.hatchways.io/assessment/students');
         setClientData(response.data);

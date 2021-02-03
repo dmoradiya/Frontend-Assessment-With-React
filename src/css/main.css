@@ -16,9 +16,6 @@
     padding: 0.5rem 0;
     margin-top: 1rem;
 }
-.input-label {
-    display: none;
-}
 #search-by-name-input {    
     width: 50%;
     margin-left: 1.5rem;
@@ -26,6 +23,9 @@
     border-radius: .5rem;    
     border:none;
     padding-bottom: 0.5rem;
+}
+#search-by-name-label {
+    display: none;
 }
 #info-section-wrap {    
     display: flex;    
@@ -35,7 +35,7 @@
     height: auto;
 }
 #info-wrap {    
-   margin-right: 20rem;   
+   margin-right: 15rem;   
 }
 #info-wrap h2 {
     font-size: 2rem;
@@ -53,11 +53,11 @@
     margin-top: 2.5rem;
     margin-left: 3rem; 
 }
-/* .expand-view {    
+#expand-view {    
     color: rgba(46, 43, 43, 0.432);
     cursor: pointer;
-    transform: scale(1.5);
-} */
+    margin-right: 2rem;
+}
 /*Style Scroll bar*/
 ::-webkit-scrollbar {
     width: 0.3em;
