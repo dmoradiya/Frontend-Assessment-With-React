@@ -31,11 +31,14 @@
     display: flex;    
     border-bottom: .05rem solid  rgba(0, 0, 0, 0.25);;
     padding: 1.5rem 0;  
-    justify-content: space-between;
+    
     height: auto;
 }
+#image-wrap {
+    width: 15rem;
+}
 #info-wrap {    
-   margin-right: 15rem;   
+   width: 40rem;
 }
 #info-wrap h2 {
     font-size: 2rem;
@@ -47,16 +50,18 @@
     padding-bottom: 0.5rem;
 }
 #image {
-    transform: scale(2);
+    transform: scale(2.2);
     border: 1px solid  rgba(0, 0, 0, 0.25);
     border-radius: 50%;
-    margin-top: 2.5rem;
-    margin-left: 3rem; 
+    margin-top: 3rem;
+    margin-left: 5rem; 
 }
 #expand-view {    
     color: rgba(46, 43, 43, 0.432);
-    cursor: pointer;
-    margin-right: 2rem;
+    cursor: pointer;    
+    width: 5rem;
+    font-size: 2rem;
+    
 }
 #tag-name-wrap {
     display: flex;
@@ -66,7 +71,7 @@
     background-color: rgba(0, 0, 0, 0.25);
     padding: 0.5rem 0.5rem 0 0.5rem;
     border-radius: 10%;
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;    
 }
 form {
     margin-left: 2rem;
