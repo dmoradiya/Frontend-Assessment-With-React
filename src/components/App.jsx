@@ -36,8 +36,7 @@ const App = () => {
                         <p>{"Company : "+val.company}</p>
                         <p>{"Skill : "+val.skill}</p>                    
                         <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
-                        {uniqueItems.map(item => (item === val.id) ?                         
-                        
+                        {uniqueItems.map(item => (item === val.id) ?                          
                         <div className={clickCounter(expand,val.id) ? "show-results" : "hide-results"} >
                             <p>{"Test 1 : "+val.grades[0]}</p>
                             <p>{"Test 2 : "+val.grades[1]}</p>
@@ -47,9 +46,7 @@ const App = () => {
                             <p>{"Test 6 : "+val.grades[5]}</p>
                             <p>{"Test 7 : "+val.grades[6]}</p>
                             <p>{"Test 8 : "+val.grades[7]}</p>
-                        </div> : 
-                        null
-                        
+                        </div> : null                        
                         )}
                     </div>  
                     <p id="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
