@@ -50,11 +50,14 @@ const App = () => {
                             <p>{"Test 8 : "+val.grades[7]}</p>
                         </div> : null                        
                         )}
-                        {tag.map(item => (item.id === val.id) ?                                                 
-                        <p>{item.name}</p> : null                        
-                        )}                       
+                        <div id="tag-name-wrap">
+                        {tag.map(item => (item.id === val.id) ?  
+                            <p id="tag-name">{item.name}</p>
+                            : null                        
+                        )}  
+                        </div>                     
                         <form onSubmit={submitHandler(val.id)}>
-                            <label className="input-add-tag-label" htmlFor="add-tag">Add a tag</label>                                                        
+                            <label id="input-add-tag-label" htmlFor="add-tag">Add a tag</label>                                                        
                             <input id="add-tag" type="text" placeholder="Add a tag" onChange={handleFieldChange} />
                         </form>
                     </div>  
