@@ -4,6 +4,7 @@ import "../css/main.css";
 import { FaPlus, FaMinus } from 'react-icons/fa';
 
 const App = () => {
+
     const [clientData, setClientData] = useState([]); 
     const [loading, setLoading] = useState(true); 
     const [searchName, setSearchName] = useState('');
@@ -11,34 +12,36 @@ const App = () => {
     const [expand, setExpand] = useState([]); 
     const [tag, setTag] = useState([]);
     const [tagValue, setTagValue] = useState('');   
+    
 
     const renderClientData = (clientData) => {
         return (
            <section id="main-section">
                <div id="search-by-name-wrap">
                     <label className="input-label" htmlFor="search-by-name">Search By Name</label>
-                    <input id="search-by-name-input" type="text" placeholder="Search by name" onChange={handleFieldChange} />
+                    <input id="search-by-name-input" type="text" placeholder="Search by name"  onChange={e => { setSearchName( e.target.value ) }}
+                       value={searchName} />
                 </div>
                 <div id="search-by-tag-wrap">
                     <label className="input-label" htmlFor="search-by-tag-input">Search By tag</label>
-                    <input id="search-by-tag-input" type="text" placeholder="Search by tag" onChange={handleFieldChange} />
-                </div>
-                {clientData.students.filter(nameSearchData => {
+                    <input id="search-by-tag-input" type="text" placeholder="Search by tag" onChange={e => { setSearchTag( e.target.value ) }}
+                       value={searchTag} />
+                </div>             
+                {clientData.students.filter(nameSearchData => { 
                     if (searchName === '') {
                         return nameSearchData
                     }
                     else {
                        return ( nameSearchData.firstName.toLowerCase().includes(searchName.toLowerCase())  ||
-                                nameSearchData.lastName.toLowerCase().includes(searchName.toLowerCase()))                               
+                                nameSearchData.lastName.toLowerCase().includes(searchName.toLowerCase()))  
                     }                      
-                }).filter(tagSearchData=>{
+                }).filter(tagSearchData=>{ 
                     if (searchTag === '') {
                         return tagSearchData;
-                    }
+                    }                    
                     else {
                         return filterTag.includes(tagSearchData.id)
-                    }
-                       
+                    }                       
                 })
                 .map(val => 
                 <section key={val.id} id="info-section-wrap">
@@ -51,8 +54,8 @@ const App = () => {
                         <p>{"Company : "+val.company}</p>
                         <p>{"Skill : "+val.skill}</p>                    
                         <p>{"Average : "+val.grades.map((x,i,arr) => x/arr.length).reduce((a,b) => a + b)+"%"}</p>               
-                        {uniqueItems.map(item => (item === val.id) ?                          
-                        <div className={clickCounter(expand,val.id) ? "show-results" : "hide-results"} >
+                        {uniqueItems.map((item,index) => (item === val.id) ?                          
+                        <div key={index} className={clickCounter(expand,val.id) ? "show-results" : "hide-results"} >
                             <p>{"Test 1 : "+val.grades[0]}</p>
                             <p>{"Test 2 : "+val.grades[1]}</p>
                             <p>{"Test 3 : "+val.grades[2]}</p>
@@ -65,14 +68,14 @@ const App = () => {
                         )}
                         <div id="tag-name-wrap">
                            
-                        {tag.map(item => (item.id === val.id) ?  
-                            <p id="tag-name">{item.name}</p>
+                        {tag.map((item,index) => (item.id === val.id) ?  
+                            <p key={index} className="tag-name">{item.name}</p>
                             : null                        
                         )}  
                         </div>                     
                         <form onSubmit={submitHandler(val.id)}>
-                            <label className="input-label" htmlFor="add-tag">Add a tag</label>                                                        
-                            <input id="add-tag" type="text" placeholder="Add a tag" onChange={handleFieldChange} />
+                            <label className="input-label" htmlFor={"add-tag-"+val.id}>Add a tag</label>                                                        
+                            <input className="add-tag" id={"add-tag-"+val.id} type="text" placeholder="Add a tag" onChange={handleFieldChange(val.id)} />
                         </form>
                     </div>  
                     <p id="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
@@ -81,18 +84,10 @@ const App = () => {
            </section>
         );
     }
-
-
-
-    function handleFieldChange(event) { // Updates the constant values with whatever is located in the input fields
-        switch (event.target.id) {
-            case "search-by-name-input":
-                setSearchName(event.target.value);
-                break;    
-            case "search-by-tag-input":
-                setSearchTag(event.target.value);
-                break;    
-            case "add-tag":
+  
+    const handleFieldChange = val => (event) => { // Updates the constant values with whatever is located in the input fields
+        switch (event.target.id) {          
+            case "add-tag-"+val:
                 setTagValue(event.target.value);
                 break;             
             default:
@@ -112,26 +107,27 @@ const App = () => {
         const number = arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
         if (number % 2 === 0)
         {
-            return false
+            return false;
         }
         else
         {
-            return true
+            return true;
         }
     }
 
-    const submitHandler = val => (event) => { 
+    const submitHandler = val => (event) => { //form input data saved as an array object
         event.preventDefault();  
         let tagObj = {
             id: val,
             name: tagValue
         };
-        setTag([...tag, tagObj]);                        
+        setTag([...tag, tagObj]);    
+                        
     }
    
-    const filterTag = tag.filter(x=> {
-        return x.name.includes(searchTag)
-    }).map(x=>x.id)
+    const filterTag = tag.filter(data=> { // Filter tag according to student ID
+        return data.name.includes(searchTag)
+    }).map(data=>data.id)
     
     const populateClientData = async () => { // Populates response with API
         const response = await axios.get('https://api.hatchways.io/assessment/students');

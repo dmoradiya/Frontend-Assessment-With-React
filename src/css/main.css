@@ -65,14 +65,12 @@
     color: rgba(46, 43, 43, 0.432);
     cursor: pointer;    
     width: 5rem;
-    font-size: 2rem;
-    
+    font-size: 2rem;    
 }
 #tag-name-wrap {
-    display: flex;
-   
+    display: flex;   
 }
-#tag-name {
+.tag-name {
     background-color: rgba(0, 0, 0, 0.25);
     padding: 0.5rem 0.5rem 0 0.5rem;
     border-radius: 10%;
@@ -81,7 +79,7 @@
 form {
     margin-left: 2rem;
 }
-#add-tag {    
+.add-tag {    
     border: none; 
     border-bottom: 0.1rem solid  rgba(0, 0, 0, 0.25);      
 }
