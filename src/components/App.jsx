@@ -6,7 +6,8 @@ import { FaPlus, FaMinus } from 'react-icons/fa';
 const App = () => {
     const [clientData, setClientData] = useState([]); 
     const [loading, setLoading] = useState(true); 
-    const [searchValue, setSearchValue] = useState('');
+    const [searchName, setSearchName] = useState('');
+    const [searchTag, setSearchTag] = useState('');
     const [expand, setExpand] = useState([]); 
     const [tag, setTag] = useState([]);
     const [tagValue, setTagValue] = useState('');   
@@ -15,17 +16,29 @@ const App = () => {
         return (
            <section id="main-section">
                <div id="search-by-name-wrap">
-                    <label id="search-by-name-label" htmlFor="search-by-name">Search By Name</label>
+                    <label className="input-label" htmlFor="search-by-name">Search By Name</label>
                     <input id="search-by-name-input" type="text" placeholder="Search by name" onChange={handleFieldChange} />
                 </div>
-                {clientData.students.filter(filterData => {
-                    if (searchValue === '') {
-                        return filterData
+                <div id="search-by-tag-wrap">
+                    <label className="input-label" htmlFor="search-by-tag-input">Search By tag</label>
+                    <input id="search-by-tag-input" type="text" placeholder="Search by tag" onChange={handleFieldChange} />
+                </div>
+                {clientData.students.filter(nameSearchData => {
+                    if (searchName === '') {
+                        return nameSearchData
                     }
                     else {
-                       return (filterData.firstName.toLowerCase().includes(searchValue.toLowerCase())  ||
-                                filterData.lastName.toLowerCase().includes(searchValue.toLowerCase()))  
+                       return ( nameSearchData.firstName.toLowerCase().includes(searchName.toLowerCase())  ||
+                                nameSearchData.lastName.toLowerCase().includes(searchName.toLowerCase()))                               
+                    }                      
+                }).filter(tagSearchData=>{
+                    if (searchTag === '') {
+                        return tagSearchData;
                     }
+                    else {
+                        return filterTag.includes(tagSearchData.id)
+                    }
+                       
                 })
                 .map(val => 
                 <section key={val.id} id="info-section-wrap">
@@ -51,13 +64,14 @@ const App = () => {
                         </div> : null                        
                         )}
                         <div id="tag-name-wrap">
+                           
                         {tag.map(item => (item.id === val.id) ?  
                             <p id="tag-name">{item.name}</p>
                             : null                        
                         )}  
                         </div>                     
                         <form onSubmit={submitHandler(val.id)}>
-                            <label id="input-add-tag-label" htmlFor="add-tag">Add a tag</label>                                                        
+                            <label className="input-label" htmlFor="add-tag">Add a tag</label>                                                        
                             <input id="add-tag" type="text" placeholder="Add a tag" onChange={handleFieldChange} />
                         </form>
                     </div>  
@@ -73,8 +87,11 @@ const App = () => {
     function handleFieldChange(event) { // Updates the constant values with whatever is located in the input fields
         switch (event.target.id) {
             case "search-by-name-input":
-                setSearchValue(event.target.value);
-                break;     
+                setSearchName(event.target.value);
+                break;    
+            case "search-by-tag-input":
+                setSearchTag(event.target.value);
+                break;    
             case "add-tag":
                 setTagValue(event.target.value);
                 break;             
@@ -104,15 +121,18 @@ const App = () => {
     }
 
     const submitHandler = val => (event) => { 
-        event.preventDefault(); 
+        event.preventDefault();  
         let tagObj = {
             id: val,
             name: tagValue
         };
-        setTag([...tag, tagObj]);       
-       
+        setTag([...tag, tagObj]);                        
     }
-
+   
+    const filterTag = tag.filter(x=> {
+        return x.name.includes(searchTag)
+    }).map(x=>x.id)
+    
     const populateClientData = async () => { // Populates response with API
         const response = await axios.get('https://api.hatchways.io/assessment/students');
         setClientData(response.data);

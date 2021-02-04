@@ -12,11 +12,16 @@
     border-radius: 20px;
 }
 #search-by-name-wrap {
+    border-bottom: 0.1rem solid rgba(63, 59, 59, 0.411);
+    padding: 0.5rem 0;
+    margin-top: 1rem;
+}
+#search-by-tag-wrap {
     border-bottom: 0.3rem solid rgba(63, 59, 59, 0.411);
     padding: 0.5rem 0;
     margin-top: 1rem;
 }
-#search-by-name-input {    
+#search-by-name-input, #search-by-tag-input {    
     width: 50%;
     margin-left: 1.5rem;
     outline: 0;    
@@ -24,7 +29,7 @@
     border:none;
     padding-bottom: 0.5rem;
 }
-#search-by-name-label, #input-add-tag-label {
+.input-label {
     display: none;
 }
 #info-section-wrap {    
