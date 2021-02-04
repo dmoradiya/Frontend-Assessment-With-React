@@ -19,21 +19,27 @@ const App = () => {
            <section id="main-section">
                <div id="search-by-name-wrap">
                     <label className="input-label" htmlFor="search-by-name">Search By Name</label>
-                    <input id="search-by-name-input" type="text" placeholder="Search by name"  onChange={e => { setSearchName( e.target.value ) }}
-                       value={searchName} />
+                    <input id="search-by-name-input" 
+                            type="text" 
+                            placeholder="Search by name"  
+                            onChange={e => { setSearchName( e.target.value ) }}
+                            value={searchName} />
                 </div>
                 <div id="search-by-tag-wrap">
                     <label className="input-label" htmlFor="search-by-tag-input">Search By tag</label>
-                    <input id="search-by-tag-input" type="text" placeholder="Search by tag" onChange={e => { setSearchTag( e.target.value ) }}
-                       value={searchTag} />
+                    <input id="search-by-tag-input" 
+                            type="text" 
+                            placeholder="Search by tag" 
+                            onChange={e => { setSearchTag( e.target.value ) }}
+                            value={searchTag} />
                 </div>             
                 {clientData.students.filter(nameSearchData => { 
                     if (searchName === '') {
                         return nameSearchData
                     }
                     else {
-                       return ( nameSearchData.firstName.toLowerCase().includes(searchName.toLowerCase())  ||
-                                nameSearchData.lastName.toLowerCase().includes(searchName.toLowerCase()))  
+                       return ( nameSearchData.firstName.toLowerCase().includes(searchName.toLowerCase().trim())  ||
+                                nameSearchData.lastName.toLowerCase().includes(searchName.toLowerCase().trim()))  
                     }                      
                 }).filter(tagSearchData=>{ 
                     if (searchTag === '') {
@@ -75,10 +81,16 @@ const App = () => {
                         </div>                     
                         <form onSubmit={submitHandler(val.id)}>
                             <label className="input-label" htmlFor={"add-tag-"+val.id}>Add a tag</label>                                                        
-                            <input className="add-tag" id={"add-tag-"+val.id} type="text" placeholder="Add a tag" onChange={handleFieldChange(val.id)} />
+                            <input  className="add-tag" 
+                                    id={"add-tag-"+val.id} 
+                                    type="text" 
+                                    placeholder="Add a tag" 
+                                    onChange={handleFieldChange(val.id)} />
                         </form>
                     </div>  
-                    <p id="expand-view" onClick={testInfo(val.id)}>{clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
+                    <p  id="expand-view" 
+                        onClick={testInfo(val.id)}>
+                        {clickCounter(expand,val.id)? <FaMinus /> : <FaPlus />}</p>       
                 </section>
                 )}
            </section>
@@ -126,7 +138,7 @@ const App = () => {
     }
    
     const filterTag = tag.filter(data=> { // Filter tag according to student ID
-        return data.name.includes(searchTag)
+        return data.name.toLowerCase().includes(searchTag.toLowerCase().trim())
     }).map(data=>data.id)
     
     const populateClientData = async () => { // Populates response with API
